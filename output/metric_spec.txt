@@ -1,0 +1,146 @@
+================================================================================================
+A. THE SPEC ON THE REAL DATA (36 offers), as of 2026-09-17
+================================================================================================
+    window 2025-09-18 to 2026-09-17 | accepted 26, declined 5, pending 0, unresolved 1, broken 4, withdrawn 0, superseded 0
+    DASHBOARD: 83.9% (26 of 31), 95% interval 67.4% to 92.9% | AMBIGUOUS: 5 offers need fixing; if all declined 72.2%, if all accepted 86.1%
+      fix list: OFF-00002 broken: pending with decision date
+      fix list: OFF-00007 broken: pending with decision date
+      fix list: OFF-00013 broken: pending with decision date
+      fix list: OFF-00020 broken: pending with decision date
+      fix list: OFF-00021 unresolved
+
+  Quarterly view (calendar quarter of Offers.Offered On): counts only, never a percentage
+    2025-Q4: accepted 7, declined 1, decided 8, pending 0, unresolved 0, broken 0
+    2026-Q1: accepted 5, declined 0, decided 5, pending 0, unresolved 0, broken 1
+    2026-Q2: accepted 8, declined 4, decided 12, pending 0, unresolved 1, broken 1
+    2026-Q3: accepted 6, declined 0, decided 6, pending 0, unresolved 0, broken 2
+    largest quarter by decided offers: 12 (minimum for a percentage is 20)
+
+  What happens if an engineer reads the application instead of the offer
+    Application Stage=Hired / applications with an offer: 26/36 = 72.2%
+    Offered On differs between the two tables on 3/36 offers:
+      OFF-00003: Offers 2025-12-13, Applications 2025-12-24, gap 11 days
+      OFF-00002: Offers 2026-01-17, Applications 2026-01-24, gap 7 days
+      OFF-00001: Offers 2025-12-02, Applications 2025-12-07, gap 5 days
+
+  Offers by the status of their opening
+    Open       {'Pending': 3, 'Accepted': 11}
+    Filled     {'Accepted': 11, 'Declined': 3}
+    On Hold    {'Pending': 2}
+    Cancelled  {'Accepted': 4, 'Declined': 2}
+    offers on Cancelled openings: 6/36; on On Hold openings: 2/36
+    rate if offers on Cancelled openings were dropped: 22/25 = 88.0% (spec keeps them: 83.9%)
+
+  Other checks the spec relies on
+    applications with more than one offer today: 0/36
+    offers with no Offered On: 0/36
+    decided offers with no Decision On: 0/31
+    offers whose application has a non-unique Application ID (join must use the record link): 1/36
+
+  People with more than one decided offer (the unit question: offer or person)
+    CAND-00015 Sneha Shah: OFF-00030 Accepted 2026-03-20, OFF-00005 Accepted 2026-07-05
+    CAND-00019 Pooja Khanna: OFF-00031 Accepted 2025-12-20, OFF-00006 Declined 2026-04-20
+    CAND-00035 Vinay Khanna: OFF-00008 Accepted 2026-02-01, OFF-00035 Accepted 2026-07-06
+    decided offers 31 -> people with a decided offer 28; people with two decided offers 3
+    per person, any acceptance counts: 24/28 = 85.7%; per person, latest offer counts: 23/28 = 82.1%; per offer (the spec): 83.9%
+
+================================================================================================
+B. BREAKING THE SPEC - synthetic rows added to the real 36
+================================================================================================
+
+  B1. Revised offer: OFF-00012 was Declined; a second, higher offer on the same application is Accepted
+    window 2025-09-18 to 2026-09-17 | accepted 27, declined 4, pending 0, unresolved 1, broken 4, withdrawn 0, superseded 1
+    DASHBOARD: 87.1% (27 of 31), 95% interval 71.1% to 94.9% | AMBIGUOUS: 5 offers need fixing; if all declined 75.0%, if all accepted 88.9%
+      fix list: OFF-00002 broken: pending with decision date
+      fix list: OFF-00007 broken: pending with decision date
+      fix list: OFF-00013 broken: pending with decision date
+      fix list: OFF-00020 broken: pending with decision date
+      fix list: OFF-00021 unresolved
+      -> the first offer is superseded, the application counts once, as Accepted. Without the rule it would count twice: 27/32 = 84.4%.
+    same application, but the undated offer is the newer one (must reach the fix list, not vanish):
+    window 2025-09-18 to 2026-09-17 | accepted 26, declined 5, pending 0, unresolved 1, broken 5, withdrawn 0, superseded 0
+    DASHBOARD: 83.9% (26 of 31), 95% interval 67.4% to 92.9% | AMBIGUOUS: 6 offers need fixing; if all declined 72.2%, if all accepted 86.1%
+      fix list: OFF-00002 broken: pending with decision date
+      fix list: OFF-00007 broken: pending with decision date
+      fix list: OFF-00013 broken: pending with decision date
+      fix list: OFF-00020 broken: pending with decision date
+      fix list: OFF-00021 unresolved
+      fix list: OFF-90004 broken: no offered date
+
+  B2. Accept then renege: OFF-00024 was Accepted, candidate does not start
+    if the recruiter overwrites Status to Declined (wrong: history changes):
+    window 2025-09-18 to 2026-09-17 | accepted 25, declined 6, pending 0, unresolved 1, broken 4, withdrawn 0, superseded 0
+    DASHBOARD: 80.6% (25 of 31), 95% interval 63.7% to 90.8% | AMBIGUOUS: 5 offers need fixing; if all declined 69.4%, if all accepted 83.3%
+      fix list: OFF-00002 broken: pending with decision date
+      fix list: OFF-00007 broken: pending with decision date
+      fix list: OFF-00013 broken: pending with decision date
+      fix list: OFF-00020 broken: pending with decision date
+      fix list: OFF-00021 unresolved
+    with Status=Reneged (spec: still an accepted offer; renege is a separate count):
+    window 2025-09-18 to 2026-09-17 | accepted 26, declined 5, pending 0, unresolved 1, broken 4, withdrawn 0, superseded 0
+    DASHBOARD: 83.9% (26 of 31), 95% interval 67.4% to 92.9% | AMBIGUOUS: 5 offers need fixing; if all declined 72.2%, if all accepted 86.1%
+      fix list: OFF-00002 broken: pending with decision date
+      fix list: OFF-00007 broken: pending with decision date
+      fix list: OFF-00013 broken: pending with decision date
+      fix list: OFF-00020 broken: pending with decision date
+      fix list: OFF-00021 unresolved
+
+  B3. Offer on a cancelled opening, company pulls a live offer before the candidate decides
+    window 2025-09-18 to 2026-09-17 | accepted 26, declined 5, pending 0, unresolved 1, broken 4, withdrawn 1, superseded 0
+    DASHBOARD: 83.9% (26 of 31), 95% interval 67.4% to 92.9% | AMBIGUOUS: 5 offers need fixing; if all declined 72.2%, if all accepted 86.1%
+      fix list: OFF-00002 broken: pending with decision date
+      fix list: OFF-00007 broken: pending with decision date
+      fix list: OFF-00013 broken: pending with decision date
+      fix list: OFF-00020 broken: pending with decision date
+      fix list: OFF-00021 unresolved
+      -> Withdrawn is outside the rate and shown as a count. A candidate decision on a cancelled opening still counts (see A).
+
+  B4. Offer with no offered date
+    window 2025-09-18 to 2026-09-17 | accepted 26, declined 5, pending 0, unresolved 1, broken 5, withdrawn 0, superseded 0
+    DASHBOARD: 83.9% (26 of 31), 95% interval 67.4% to 92.9% | AMBIGUOUS: 6 offers need fixing; if all declined 72.2%, if all accepted 86.1%
+      fix list: OFF-00002 broken: pending with decision date
+      fix list: OFF-00007 broken: pending with decision date
+      fix list: OFF-00013 broken: pending with decision date
+      fix list: OFF-00020 broken: pending with decision date
+      fix list: OFF-00021 unresolved
+      fix list: OFF-90003 broken: no offered date
+      -> cannot be placed in a window: excluded and put on the fix list, no fallback to the Applications date.
+
+  B5. A year with fewer than 20 decided offers (as of 2026-02-01)
+    window 2025-02-02 to 2026-02-01 | accepted 9, declined 1, pending 0, unresolved 0, broken 1, withdrawn 0, superseded 0
+    DASHBOARD: 'Insufficient data' (10 decided, needs 20) + counts. No percentage.
+      fix list: OFF-00002 broken: pending with decision date
+
+================================================================================================
+C. TESTS FOR THE GAPS THE SECOND ENGINEER FOUND
+================================================================================================
+
+  C1. State with 20+ decided and nothing wrong (the 5 pending offers removed)
+    window 2025-09-18 to 2026-09-17 | accepted 26, declined 5, pending 0, unresolved 0, broken 0, withdrawn 0, superseded 0
+    DASHBOARD: 83.9% (26 of 31), 95% interval 67.4% to 92.9% | NORMAL
+
+  C2. Same, plus one undated Accepted offer: Ambiguous, fix list, no range
+    window 2025-09-18 to 2026-09-17 | accepted 26, declined 5, pending 0, unresolved 0, broken 1, withdrawn 0, superseded 0
+    DASHBOARD: 83.9% (26 of 31), 95% interval 67.4% to 92.9% | AMBIGUOUS: 1 offers need fixing; no range (the broken offers have no place in the window)
+      fix list: OFF-90003 broken: no offered date
+
+  C3. Step order: a later Pending offer on the application of OFF-00024 (Accepted) supersedes it, whatever its status
+    window 2025-09-18 to 2026-09-17 | accepted 25, declined 5, pending 1, unresolved 0, broken 0, withdrawn 0, superseded 1
+    DASHBOARD: 83.3% (25 of 30), 95% interval 66.4% to 92.7% | NORMAL
+
+  C4. Window edge: an Accepted offer dated the as-of date minus 364 days is in, minus 365 days is out
+    offered 2025-09-18:
+    window 2025-09-18 to 2026-09-17 | accepted 27, declined 5, pending 0, unresolved 0, broken 0, withdrawn 0, superseded 0
+    DASHBOARD: 84.4% (27 of 32), 95% interval 68.2% to 93.1% | NORMAL
+    offered 2025-09-17:
+    window 2025-09-18 to 2026-09-17 | accepted 26, declined 5, pending 0, unresolved 0, broken 0, withdrawn 0, superseded 0
+    DASHBOARD: 83.9% (26 of 31), 95% interval 67.4% to 92.9% | NORMAL
+
+  C5. Past as-of date 2026-02-01, run on today's statuses (screen says 'Based on current statuses')
+    window 2025-02-02 to 2026-02-01 | accepted 9, declined 1, pending 0, unresolved 0, broken 1, withdrawn 0, superseded 0
+    DASHBOARD: 'Insufficient data' (10 decided, needs 20) + counts. No percentage.
+      fix list: OFF-00002 broken: pending with decision date
+
+  C6. Empty is checked before Insufficient data (as of 2025-06-01, before any offer)
+    window 2024-06-02 to 2025-06-01 | accepted 0, declined 0, pending 0, unresolved 0, broken 0, withdrawn 0, superseded 0
+    DASHBOARD: 'No decided offers in this window' + counts

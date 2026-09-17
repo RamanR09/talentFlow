@@ -1,0 +1,191 @@
+=== INPUT ===
+candidates=300 applications=350 openings=24
+hired rows=26
+opening status: {'Filled': 8, 'Cancelled': 2, 'Open': 11, 'On Hold': 3}
+candidate Source: {'Agency': 35, 'LinkedIn': 31, 'Job Board': 191, 'Career Site': 31, 'Referral': 8, 'Campus': 4}
+
+=== SCENARIOS ===
+S0 all rows, recorded group
+  Job Board  rows= 236 hires=  7
+  Referral   rows=  13 hires=  7
+  Other      rows= 101 hires= 12
+  TOTAL      rows= 350 hires= 26
+S1 all rows, evidence group
+  Job Board  rows= 219 hires=  6
+  Referral   rows=  37 hires= 10
+  Other      rows=  94 hires= 10
+  TOTAL      rows= 350 hires= 26
+S2 Rule D survivors, recorded group
+  Job Board  rows= 234 hires=  7
+  Referral   rows=  12 hires=  6
+  Other      rows= 101 hires= 12
+  TOTAL      rows= 347 hires= 25
+S3 Rule D survivors, evidence group
+  Job Board  rows= 217 hires=  6
+  Referral   rows=  36 hires=  9
+  Other      rows=  94 hires= 10
+  TOTAL      rows= 347 hires= 25
+S4 Rule D survivors, evidence group, STRICT hires
+  Job Board  rows= 217 hires=  4
+  Referral   rows=  36 hires=  7
+  Other      rows=  94 hires= 10
+  TOTAL      rows= 347 hires= 21
+
+=== RULE D ===
+(person,opening) groups=347, groups with >1 row=3, rows in those groups=6, dropped=3, survivors=347
+sizes of multi-row groups: {2: 3}
+multi-row groups spanning >1 candidate record: 0; within a single candidate record: 3
+  NOTE MULTI-HIRED in group (('vinay khanna', '919675602739'), 'recsz6wxHxrxGkre3'): ['APP-00335', 'APP-00035']
+dropped rows (rid | AppID | cand | req | stage | applied | rec/ev || kept AppID rid stage applied):
+  recwwFHgFJVvqXjbl | APP-00005 | CAND-00005 | REQ-2026-017 | Rejected | 2025-08-30 | Job Board/Job Board || APP-00305 recjqevDefQTd1YgU Applied 2026-07-04
+  recrCOYOF6KWpUmqW | APP-00035 | CAND-00035 | REQ-2025-019 | Hired | 2026-01-14 | Referral/Referral || APP-00335 recF6Nq4dyCozd9Cs Hired 2026-06-13
+  rec2boXJI2mO6NvdL | APP-00311 | CAND-00011 | REQ-2025-007 | Rejected | 2025-10-29 | Job Board/Job Board || APP-00010 receoLsZYU1qm4tPS Applied 2025-11-07
+dropped by stage: {'Rejected': 2, 'Hired': 1}
+dropped by recorded group: {'Job Board': 2, 'Referral': 1}
+dropped by evidence group: {'Job Board': 2, 'Referral': 1}
+dropped rows that are hires: 1
+
+=== HIRES ON CANCELLED OPENINGS ===
+count=4
+  APP-00002 | reciNqlMlx5mYgt5N | REQ-2025-015 | CAND-00002 | rec=Referral ev=Referral | survives Rule D=True
+  APP-00103 | reclvmFsKkhQ8xGyW | REQ-2025-015 | CAND-00103 | rec=Other ev=Referral | survives Rule D=True
+  APP-00319 | recCeQ8EDYbkRp312 | REQ-2025-005 | CAND-00019 | rec=Job Board ev=Job Board | survives Rule D=True
+  APP-00334 | recaFt6waPJsgv4Ct | REQ-2025-015 | CAND-00034 | rec=Job Board ev=Job Board | survives Rule D=True
+hires by opening status: {'Filled': 11, 'Open': 11, 'Cancelled': 4}
+
+=== PEOPLE LEVEL ===
+distinct people=294
+people with >1 candidate row=6 (row-count dist: {1: 288, 2: 6})
+people whose hired applications sit on candidate rows of different groups (P0 ambiguity)=0
+P0
+  Job Board  people= 185 hired=  7
+  Referral   people=   8 hired=  5
+  Other      people= 101 hired= 12
+  TOTAL      people= 294 hired= 24
+P1
+  Job Board  people= 174 hired=  6
+  Referral   people=  26 hired=  8
+  Other      people=  94 hired= 10
+  TOTAL      people= 294 hired= 24
+people moved by P1 vs P0: {('Other', 'Referral'): 7, ('Job Board', 'Referral'): 11}
+  of which hired: {('Job Board', 'Referral'): 1, ('Other', 'Referral'): 2}
+people whose candidate rows disagree on three-way group:
+  count=2
+  varun sharma: CAND-00001[Job Board,2025-04-08], CAND-00002[Referral,2026-06-07] | hired=True P0=Referral P1=Referral
+  aarav menon: CAND-00004[Referral,2026-04-14], CAND-00003[Job Board,2026-05-30] | hired=True P0=Referral P1=Referral
+  (people whose rows disagree on RAW Source value=2)
+people with >1 hired application:
+  count=2
+  sneha shah: APP-00015/rec0yM3MdyWBDkjXA/REQ-2026-008/CAND-00015/opening Filled; APP-00315/reclkeeZCve9HMAWx/REQ-2025-024/CAND-00015/opening Filled
+  vinay khanna: APP-00335/recF6Nq4dyCozd9Cs/REQ-2025-019/CAND-00035/opening Filled; APP-00035/recrCOYOF6KWpUmqW/REQ-2025-019/CAND-00035/opening Filled
+hired application rows=26, hired people=24
+
+=== REFERRAL CONSISTENCY MATRIX (all rows) ===
+  SourceReferral=True  ReferredBy=True  rows=   3 distinct_candidates=   3 hires=  0
+  SourceReferral=True  ReferredBy=False rows=  10 distinct_candidates=   5 hires=  7
+  SourceReferral=False ReferredBy=True  rows=  24 distinct_candidates=  18 hires=  3
+  SourceReferral=False ReferredBy=False rows= 313 distinct_candidates= 274 hires= 16
+  cell sums: rows=350 hires=26
+  NOTE distinct candidates summed over cells=300 vs 300 candidates with applications (a candidate can sit in 2 cells)
+Referred By present, Source not Referral: by original Source (rows / distinct cands / hires):
+  Agency       rows=  4 cands=  4 hires=  1
+  Career Site  rows=  3 cands=  3 hires=  1
+  Job Board    rows= 17 cands= 11 hires=  1
+  hire Application IDs: [('APP-00103', 'reclvmFsKkhQ8xGyW', 'Career Site'), ('APP-00293', 'rec5EHcqYRoWmEZKL', 'Agency'), ('APP-00310', 'recOQKvwlqxac6vRX', 'Job Board')]
+Source Referral, no Referred By: Candidate IDs: ['CAND-00002', 'CAND-00004', 'CAND-00014', 'CAND-00015', 'CAND-00035']
+  rows: [('CAND-00002', 'APP-00002', 'Hired'), ('CAND-00002', 'APP-00302', 'Rejected'), ('CAND-00004', 'APP-00004', 'Hired'), ('CAND-00004', 'APP-00304', 'Rejected'), ('CAND-00014', 'APP-00014', 'Hired'), ('CAND-00014', 'APP-00314', 'Rejected'), ('CAND-00015', 'APP-00015', 'Hired'), ('CAND-00015', 'APP-00315', 'Hired'), ('CAND-00035', 'APP-00035', 'Hired'), ('CAND-00035', 'APP-00335', 'Hired')]
+Source Referral AND Referred By rows: [('CAND-00232', 'APP-00232', 'Screening'), ('CAND-00242', 'APP-00242', 'Interview'), ('CAND-00256', 'APP-00256', 'Rejected')]
+Source=Referral candidates=8; with >=1 Referred By app=3; with none=5
+
+=== NOTES CHECK ===
+Notes contain "Referred internally": 38
+  of those Source == Referral: 2
+  of those with >=1 application with Referred By: 2
+  of those with Source Referral OR Referred By: 4
+  Source breakdown: {'Agency': 5, 'LinkedIn': 5, 'Job Board': 25, 'Career Site': 1, 'Referral': 2}
+  hires among their applications: 4
+  (rate of that note among all candidates by Source): {'Agency': '5/35', 'LinkedIn': '5/31', 'Job Board': '25/191', 'Career Site': '1/31', 'Referral': '2/8', 'Campus': '0/4'}
+Notes contain "Applied to two openings": 33
+  of those with >1 linked application (Candidate.Applications link): 2
+  of those with >1 application (via Applications.Candidate): 2
+  candidates overall with >1 application: 50
+
+=== SANITY ===
+S0 (350, 26) == (350,26): True
+S1 (350, 26) == (350,26): True
+S2 (347, 25) == (347,25): True
+S3 (347, 25) == (347,25): True
+S4 (347, 21) == (347,21): True
+all rows 350 - dropped 3 = survivors 347: True
+survivor hires 25 - cancelled-opening hires among survivors 4 = strict 21: True
+matrix rows sum == 350: True ; hires sum == 26: True
+S1 Referral rows == rows with ReferredBy + SourceReferral-without: 37 == 37
+
+=== CRITIQUE CHECKS ===
+Candidate<->Application link symmetric: True (fwd=350 bwd=350)
+candidates with zero applications: 0
+duplicate Application IDs: {'APP-00005': 2, 'APP-00007': 2, 'APP-00010': 2, 'APP-00001': 2}
+   APP-00001 reckLPXA8xRgWsC1l cand=CAND-00003 person=aarav menon req=REQ-2025-016 stage=Offer applied=2026-01-02 rec=Job Board ev=Job Board droppedByD=False
+   APP-00001 recsWENinZHkh9BBS cand=CAND-00001 person=varun sharma req=REQ-2026-011 stage=Rejected applied=2026-05-31 rec=Job Board ev=Job Board droppedByD=False
+   APP-00005 recGSUwByKNRw5ugN cand=CAND-00006 person=anjali jain req=REQ-2025-009 stage=Rejected applied=2026-01-03 rec=Job Board ev=Job Board droppedByD=False
+   APP-00005 recwwFHgFJVvqXjbl cand=CAND-00005 person=anjali jain req=REQ-2026-017 stage=Rejected applied=2025-08-30 rec=Job Board ev=Job Board droppedByD=True
+   APP-00007 recPKXgzmuoBaSLui cand=CAND-00009 person=kavya menon req=REQ-2026-017 stage=Rejected applied=2026-03-18 rec=Job Board ev=Job Board droppedByD=False
+   APP-00007 recsR2Y6HZo9GiSb7 cand=CAND-00007 person=sagar agarwal req=REQ-2025-019 stage=Rejected applied=2026-08-02 rec=Job Board ev=Job Board droppedByD=False
+   APP-00010 receoLsZYU1qm4tPS cand=CAND-00011 person=vinay nair req=REQ-2025-007 stage=Applied applied=2025-11-07 rec=Job Board ev=Job Board droppedByD=False
+   APP-00010 recxPVkspAJrZQp25 cand=CAND-00010 person=kavya menon req=REQ-2025-001 stage=Rejected applied=2026-02-24 rec=Job Board ev=Referral droppedByD=False
+application rows identical on (candidate rec, opening, stage, applied, closed): 0 extra rows
+same candidate record + same opening, >1 row: 3 groups
+key=email lowercased: distinct=300, keys with >1 row=0, of which spanning >1 official person=0
+key=phone digits only: distinct=294, keys with >1 row=6, of which spanning >1 official person=0
+key=last 10 phone digits: distinct=294, keys with >1 row=6, of which spanning >1 official person=0
+key=normalized name only: distinct=294, keys with >1 row=6, of which spanning >1 official person=0
+key=name letters only (strip punctuation/space): distinct=294, keys with >1 row=6, of which spanning >1 official person=0
+official people whose rows differ in raw Full Name string=0; in raw Phone string=0
+people under EXACT raw (name, phone) match: 294 (vs 294 normalized)
+multi-row people: with a repeated opening=2, all openings distinct=4
+multi-row people: email same across rows=0, differs=6
+Rule D gap in days between dropped and kept Applied On: min=9 max=308 sorted=[9, 150, 308]
+Rule D dropped rows where kept row is Hired but dropped row applied LATER: 0
+Rule D dropped rows whose group differs from kept row: recorded=0 evidence=0
+Rule D dropped rows still active (Status Active): 0; kept rows Status: {'Applied': 2, 'Hired': 1}
+openings with hires > Headcount:
+   REQ-2025-007 status=Open headcount=1 hires=2 -> [('APP-00014', 'aarav kapoor', True), ('APP-00260', 'aditi rao', True)]
+   REQ-2025-015 status=Cancelled headcount=1 hires=3 -> [('APP-00334', 'sagar bhat', True), ('APP-00002', 'varun sharma', True), ('APP-00103', 'sanjay singh', True)]
+   REQ-2025-024 status=Filled headcount=1 hires=2 -> [('APP-00315', 'sneha shah', True), ('APP-00174', 'ishita mishra', True)]
+   REQ-2026-008 status=Filled headcount=1 hires=2 -> [('APP-00015', 'sneha shah', True), ('APP-00248', 'varun tiwari', True)]
+Filled openings with zero hires: ['REQ-2026-011', 'REQ-2026-017']
+hires by opening status (Rule D survivors): {'Filled': 10, 'Open': 11, 'Cancelled': 4}
+applications with Closed On < Applied On: 0 (hires among them: 0)
+hired rows with no Closed On: 0; hired rows with Status Active: 0
+applications with Applied On before candidate Created On: 90
+applications with Applied On before opening Opened On: 3 (hires: 0)
+Offers status: {'Pending': 5, 'Accepted': 26, 'Declined': 5}
+hired rows with no linked Offer: 0; hired rows offer statuses: {('Accepted',): 26}
+non-hired rows with an Accepted offer: []
+Referred By links: 27, resolving to a People record: 27, distinct referrers: 12
+people with Referred By on some but not all of their applications: 1
+candidate records with Referred By on some but not all applications: 0
+Rule D survivors not evidence-Referral but candidate Notes say "Referred internally": rows=39 hires=1 (by rec group: {'Job Board': 28, 'Other': 11}; hires by rec group: {'Other': 1})
+raw Source values with surrounding whitespace or case variants: []
+Other group composition (candidates): {'Agency': 35, 'LinkedIn': 31, 'Career Site': 31, 'Campus': 4}
+Other group hires by raw Source (all rows): {'Agency': 4, 'LinkedIn': 3, 'Career Site': 5}
+Hires by raw Source, all rows: {'Referral': 7, 'Agency': 4, 'Job Board': 7, 'LinkedIn': 3, 'Career Site': 5}
+Hires by raw Source, S4 basis (survivor, strict, recorded source): {'Referral': 5, 'Agency': 4, 'Job Board': 5, 'LinkedIn': 3, 'Career Site': 4}
+
+=== EXTRA ===
+multi-row people detail:
+  aarav menon | CAND-00004 | Referral | created 2026-04-14 | apps: [('APP-00304', 'REQ-2025-023', 'Rejected', '2026-01-15', '-'), ('APP-00004', 'REQ-2025-013', 'Hired', '2025-11-25', '-')]
+  aarav menon | CAND-00003 | Job Board | created 2026-05-30 | apps: [('APP-00303', 'REQ-2025-007', 'Rejected', '2025-09-28', '-'), ('APP-00001', 'REQ-2025-016', 'Offer', '2026-01-02', '-')]
+  anjali jain | CAND-00006 | Job Board | created 2025-03-11 | apps: [('APP-00005', 'REQ-2025-009', 'Rejected', '2026-01-03', '-'), ('APP-00306', 'REQ-2025-015', 'Rejected', '2025-08-28', '-')]
+  anjali jain | CAND-00005 | Job Board | created 2025-08-13 | apps: [('APP-00305', 'REQ-2026-017', 'Applied', '2026-07-04', '-'), ('APP-00005', 'REQ-2026-017', 'Rejected', '2025-08-30', '-')]
+  kavya menon | CAND-00009 | Job Board | created 2025-04-28 | apps: [('APP-00309', 'REQ-2025-019', 'Applied', '2026-04-10', '-'), ('APP-00007', 'REQ-2026-017', 'Rejected', '2026-03-18', '-')]
+  kavya menon | CAND-00010 | Job Board | created 2025-07-27 | apps: [('APP-00310', 'REQ-2025-020', 'Hired', '2025-09-21', 'REF'), ('APP-00010', 'REQ-2025-001', 'Rejected', '2026-02-24', 'REF')]
+  sagar agarwal | CAND-00008 | Job Board | created 2025-04-13 | apps: [('APP-00308', 'REQ-2026-008', 'Rejected', '2026-06-11', '-'), ('APP-00008', 'REQ-2025-024', 'Interview', '2026-06-09', '-')]
+  sagar agarwal | CAND-00007 | Job Board | created 2026-06-26 | apps: [('APP-00307', 'REQ-2025-004', 'Applied', '2026-07-08', '-'), ('APP-00007', 'REQ-2025-019', 'Rejected', '2026-08-02', '-')]
+  varun sharma | CAND-00001 | Job Board | created 2025-04-08 | apps: [('APP-00301', 'REQ-2025-019', 'Rejected', '2026-01-25', '-'), ('APP-00001', 'REQ-2026-011', 'Rejected', '2026-05-31', '-')]
+  varun sharma | CAND-00002 | Referral | created 2026-06-07 | apps: [('APP-00302', 'REQ-2025-004', 'Rejected', '2026-01-11', '-'), ('APP-00002', 'REQ-2025-015', 'Hired', '2025-10-28', '-')]
+  vinay nair | CAND-00012 | Job Board | created 2025-07-04 | apps: [('APP-00312', 'REQ-2026-011', 'Screening', '2026-05-30', '-'), ('APP-00012', 'REQ-2025-019', 'Rejected', '2026-06-02', '-')]
+  vinay nair | CAND-00011 | Job Board | created 2025-10-26 | apps: [('APP-00311', 'REQ-2025-007', 'Rejected', '2025-10-29', '-'), ('APP-00010', 'REQ-2025-007', 'Applied', '2025-11-07', '-')]
+people with a strict hire: 20; by P0: {'Other': 11, 'Job Board': 5, 'Referral': 4}; by P1: {'Other': 10, 'Referral': 6, 'Job Board': 4}
+Source=Referral: hires on candidates WITH Referred By=0 of 3 rows; WITHOUT=7 of 10 rows
+P0 variant using earliest Created On for everyone: people {'Other': 101, 'Job Board': 186, 'Referral': 7} ; hired {'Other': 12, 'Job Board': 8, 'Referral': 4}

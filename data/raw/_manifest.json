@@ -1,0 +1,46 @@
+{
+ "base": "appYePRAI75PMbQNQ",
+ "pulled_at": "2026-09-17T08:45:56.772878+00:00",
+ "tables": {
+  "Departments": {
+   "records": 8,
+   "pages": 1,
+   "file": "Departments.json"
+  },
+  "People": {
+   "records": 14,
+   "pages": 1,
+   "file": "People.json"
+  },
+  "Job Openings": {
+   "records": 24,
+   "pages": 1,
+   "file": "Job_Openings.json"
+  },
+  "Candidates": {
+   "records": 300,
+   "pages": 3,
+   "file": "Candidates.json"
+  },
+  "Applications": {
+   "records": 350,
+   "pages": 4,
+   "file": "Applications.json"
+  },
+  "Interviews": {
+   "records": 160,
+   "pages": 2,
+   "file": "Interviews.json"
+  },
+  "Offers": {
+   "records": 36,
+   "pages": 1,
+   "file": "Offers.json"
+  },
+  "Findings": {
+   "records": 0,
+   "pages": 1,
+   "file": "Findings.json"
+  }
+ }
+}

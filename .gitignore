@@ -1,0 +1,14 @@
+# secrets and local settings
+.env
+.claude/
+
+# OS and Python clutter
+.DS_Store
+__pycache__/
+
+# the assessment pack (contains the API key)
+task/
+
+# raw tables hold candidate names, emails and phone numbers: re-create with scripts/pull.py
+data/raw/*.json
+!data/raw/_manifest.json

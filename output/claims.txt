@@ -1,0 +1,157 @@
+====================================================================================================
+CLAIM 1 - 'job boards are our biggest channel and bring in 26.9% of our hires'
+====================================================================================================
+Source lives on the Candidates table (300 rows). Hire = Application with Stage='Hired' (26 rows,
+identical to the 26 Offers with Status='Accepted' - audit checks F1/F2).
+
+1a. As recorded: candidate Source  [applications=350, hires=26]
+  source       cands  apps  app share  hires  hire share   hires per application
+  Job Board      191   236      67.4%      7       26.9%   7/236 = 3.0%  (95% CI 1.4-6.0%)
+  Agency          35    35      10.0%      4       15.4%   4/35 = 11.4%  (95% CI 4.5-26.0%)
+  Career Site     31    31       8.9%      5       19.2%   5/31 = 16.1%  (95% CI 7.1-32.6%)
+  LinkedIn        31    31       8.9%      3       11.5%   3/31 = 9.7%  (95% CI 3.3-24.9%)
+  Referral         8    13       3.7%      7       26.9%   7/13 = 53.8%  (95% CI 29.1-76.8%)
+  Campus           4     4       1.1%      0        0.0%   0/4 = 0.0%  (95% CI 0.0-49.0%)
+  Job Board  : 7/236 = 3.0%  (95% CI 1.4-6.0%)
+  All others : 19/114 = 16.7%  (95% CI 10.9-24.6%)
+
+1b. Re-attributed: an application with a 'Referred By' link counts as Referral  [applications=350, hires=26]
+  source       cands  apps  app share  hires  hire share   hires per application
+  Job Board      180   219      62.6%      6       23.1%   6/219 = 2.7%  (95% CI 1.3-5.8%)
+  Referral        26    37      10.6%     10       38.5%   10/37 = 27.0%  (95% CI 15.4-43.0%)
+  LinkedIn        31    31       8.9%      3       11.5%   3/31 = 9.7%  (95% CI 3.3-24.9%)
+  Agency          31    31       8.9%      3       11.5%   3/31 = 9.7%  (95% CI 3.3-24.9%)
+  Career Site     28    28       8.0%      4       15.4%   4/28 = 14.3%  (95% CI 5.7-31.5%)
+  Campus           4     4       1.1%      0        0.0%   0/4 = 0.0%  (95% CI 0.0-49.0%)
+  Job Board  : 6/219 = 2.7%  (95% CI 1.3-5.8%)
+  All others : 20/131 = 15.3%  (95% CI 10.1-22.4%)
+
+1c. Hires row by row (26)
+  APP-00002 CAND-00002 source=Referral    referred_by=no  req=REQ-2025-015 Cancelled Junior applied=2025-10-28 closed=2025-12-12
+  APP-00004 CAND-00004 source=Referral    referred_by=no  req=REQ-2025-013 Filled    Mid    applied=2025-11-25 closed=2025-12-29
+  APP-00014 CAND-00014 source=Referral    referred_by=no  req=REQ-2025-007 Open      Senior applied=2026-05-17 closed=2026-06-30
+  APP-00015 CAND-00015 source=Referral    referred_by=no  req=REQ-2026-008 Filled    Junior applied=2026-05-19 closed=2026-07-13
+  APP-00035 CAND-00035 source=Referral    referred_by=no  req=REQ-2025-019 Filled    Senior applied=2026-01-14 closed=2026-02-11
+  APP-00067 CAND-00067 source=Career Site referred_by=no  req=REQ-2026-014 Filled    Senior applied=2026-06-13 closed=2026-07-26
+  APP-00103 CAND-00103 source=Career Site referred_by=yes req=REQ-2025-015 Cancelled Junior applied=2026-01-19 closed=2026-03-18
+  APP-00134 CAND-00134 source=Career Site referred_by=no  req=REQ-2025-016 Open      Mid    applied=2025-11-08 closed=2025-12-14
+  APP-00174 CAND-00174 source=Career Site referred_by=no  req=REQ-2025-024 Filled    Mid    applied=2026-05-13 closed=2026-06-06
+  APP-00193 CAND-00193 source=Agency      referred_by=no  req=REQ-2026-014 Filled    Senior applied=2026-06-09 closed=2026-08-08
+  APP-00210 CAND-00210 source=Career Site referred_by=no  req=REQ-2025-012 Open      Junior applied=2026-05-02 closed=2026-06-14
+  APP-00248 CAND-00248 source=Agency      referred_by=no  req=REQ-2026-008 Filled    Junior applied=2026-05-13 closed=2026-06-21
+  APP-00260 CAND-00260 source=Job Board   referred_by=no  req=REQ-2025-007 Open      Senior applied=2026-04-01 closed=2026-05-18
+  APP-00265 CAND-00265 source=LinkedIn    referred_by=no  req=REQ-2026-002 Filled    Senior applied=2026-05-05 closed=2026-06-15
+  APP-00278 CAND-00278 source=Agency      referred_by=no  req=REQ-2025-004 Open      Junior applied=2026-01-02 closed=2026-02-20
+  APP-00281 CAND-00281 source=LinkedIn    referred_by=no  req=REQ-2025-010 Open      Senior applied=2026-05-16 closed=2026-06-09
+  APP-00293 CAND-00293 source=Agency      referred_by=yes req=REQ-2026-021 Open      Junior applied=2026-06-06 closed=2026-07-13
+  APP-00298 CAND-00298 source=LinkedIn    referred_by=no  req=REQ-2026-002 Filled    Senior applied=2026-06-12 closed=2026-07-17
+  APP-00310 CAND-00010 source=Job Board   referred_by=yes req=REQ-2025-020 Open      Senior applied=2025-09-21 closed=2025-10-22
+  APP-00315 CAND-00015 source=Referral    referred_by=no  req=REQ-2025-024 Filled    Mid    applied=2026-01-30 closed=2026-03-30
+  APP-00319 CAND-00019 source=Job Board   referred_by=no  req=REQ-2025-005 Cancelled Senior applied=2025-11-14 closed=2025-12-22
+  APP-00327 CAND-00027 source=Job Board   referred_by=no  req=REQ-2025-012 Open      Junior applied=2025-10-02 closed=2025-11-18
+  APP-00331 CAND-00031 source=Job Board   referred_by=no  req=REQ-2025-003 Open      Lead   applied=2026-04-09 closed=2026-04-27
+  APP-00334 CAND-00034 source=Job Board   referred_by=no  req=REQ-2025-015 Cancelled Junior applied=2025-09-08 closed=2025-10-29
+  APP-00335 CAND-00035 source=Referral    referred_by=no  req=REQ-2025-019 Filled    Senior applied=2026-06-13 closed=2026-07-09
+  APP-00336 CAND-00036 source=Job Board   referred_by=no  req=REQ-2025-020 Open      Senior applied=2025-12-14 closed=2026-01-09
+
+1d. Hires on openings whose Status is Cancelled (should those count as hires?)
+   4 of 26: Counter({'Job Board': 2, 'Referral': 1, 'Career Site': 1})
+
+1e. Speed and quality by source (as recorded)
+  Job Board    apps=236 screened=189 interviewed= 90 offered= 13  interview rate  38.1%  median days apply->hire=38 (n=7)
+  Agency       apps= 35 screened= 27 interviewed= 16 offered=  6  interview rate  45.7%  median days apply->hire=44.0 (n=4)
+  Career Site  apps= 31 screened= 23 interviewed= 15 offered=  5  interview rate  48.4%  median days apply->hire=43 (n=5)
+  LinkedIn     apps= 31 screened= 24 interviewed= 12 offered=  5  interview rate  38.7%  median days apply->hire=35 (n=3)
+  Referral     apps= 13 screened= 13 interviewed= 10 offered=  7  interview rate  76.9%  median days apply->hire=44 (n=7)
+  Campus       apps=  4 screened=  3 interviewed=  0 offered=  0  interview rate   0.0%  median days apply->hire=n/a (n=0)
+
+1f. Why job-board applications end (Rejected/Withdrawn), vs all other sources
+  Job Board  n=154: Skills Mismatch 35 (23%), Culture Fit 34 (22%), Better Candidate 33 (21%), Comp Expectation 19 (12%), No Show 12 (8%), Position Cancelled 11 (7%), Withdrew 10 (6%)
+  Others     n=60: Skills Mismatch 14 (23%), Culture Fit 11 (18%), Better Candidate 11 (18%), Position Cancelled 7 (12%), Comp Expectation 7 (12%), No Show 6 (10%), Withdrew 4 (7%)
+
+1g. Are the 26 hire rows 26 people? Candidates with more than one Hired application
+  hire rows=26, distinct candidate records hired=24
+    CAND-00015 Sneha Shah source=Referral APP-00315 REQ-2025-024 Data Engineer (Mid, headcount 1) applied=2026-01-30 hired=2026-03-30
+    CAND-00015 Sneha Shah source=Referral APP-00015 REQ-2026-008 Junior Data Analyst (Junior, headcount 1) applied=2026-05-19 hired=2026-07-13
+    CAND-00035 Vinay Khanna source=Referral APP-00035 REQ-2025-019 Support Specialist (Senior, headcount 2) applied=2026-01-14 hired=2026-02-11
+    CAND-00035 Vinay Khanna source=Referral APP-00335 REQ-2025-019 Support Specialist (Senior, headcount 2) applied=2026-06-13 hired=2026-07-09
+  Counting each hired person once (24 people): Job Board 7 (29.2%), Referral 5 (20.8%), Career Site 5 (20.8%), Agency 4 (16.7%), LinkedIn 3 (12.5%)
+  Offer acceptance with the 2 repeat-hire offers removed: all offers 24/34 = 70.6%  (95% CI 53.8-83.2%); decided only 24/29 = 82.8%  (95% CI 65.5-92.4%)
+
+====================================================================================================
+CLAIM 2 - 'our offer acceptance rate is sitting at around 72%'
+====================================================================================================
+Offers table: 36 rows -> {'Pending': 5, 'Accepted': 26, 'Declined': 5}
+  2a. Accepted / all offers (pending counted as not accepted): 26/36 = 72.2%  (95% CI 56.0-84.2%)   <- matches the VP's ~72%
+  2b. Accepted / decided offers (Accepted + Declined):          26/31 = 83.9%  (95% CI 67.4-92.9%)
+  2c. Worst case, all 5 pending decline:                        26/36 = 72.2%  (95% CI 56.0-84.2%)
+  2d. Best case, all 5 pending accept:                          31/36 = 86.1%  (95% CI 71.3-93.9%)
+
+  Pending offers in detail (pull date 2026-09-17):
+    OFF-00002 offered=2026-01-17 days_open=243 decision_on=2026-02-02 proposed_start=2026-04-06 app=APP-00001 stage=Offer/Active opening=Open
+    OFF-00021 offered=2026-05-02 days_open=138 decision_on=-          proposed_start=2026-07-02 app=APP-00235 stage=Offer/Active opening=Open
+    OFF-00013 offered=2026-06-19 days_open= 90 decision_on=2026-07-05 proposed_start=2026-07-25 app=APP-00094 stage=Offer/Active opening=On Hold
+    OFF-00020 offered=2026-08-04 days_open= 44 decision_on=2026-08-15 proposed_start=2026-09-20 app=APP-00231 stage=Offer/Active opening=On Hold
+    OFF-00007 offered=2026-08-07 days_open= 41 decision_on=2026-08-20 proposed_start=2026-09-04 app=APP-00027 stage=Offer/Active opening=Open
+  Decided offers: days from offer to decision min=2 median=10 max=20 (n=31)
+
+  2e. Declined offers in detail (5):
+    OFF-00012 reason=Counter Offer  base= 2430000 expected= 3500000 current= 2480000 band=(1600000-3000000) bonus=0 source=Agency level=Senior days final-interview->offer=8
+    OFF-00006 reason=Counter Offer  base= 2850000 expected= 1660000 current= 1130000 band=(400000-800000) bonus=50000 source=Job Board level=Junior days final-interview->offer=6
+    OFF-00019 reason=Location       base= 2680000 expected= 2350000 current= 1630000 band=(1600000-3000000) bonus=50000 source=LinkedIn level=Senior days final-interview->offer=4
+    OFF-00010 reason=Counter Offer  base= 1230000 expected=  410000 current=  300000 band=(800000-1600000) bonus=100000 source=Job Board level=Mid days final-interview->offer=7
+    OFF-00009 reason=Compensation   base=  720000 expected= 1520000 current= 1100000 band=(400000-800000) bonus=0 source=Job Board level=Junior days final-interview->offer=6
+
+  2f. Does pay explain declines? Base CTC vs candidate Expected CTC, decided offers only
+    Accepted  n=26 median base/expected=1.15  offers below expectation: 10/26
+    Declined  n= 5 median base/expected=1.14  offers below expectation: 2/5
+
+  2g. Does speed explain declines? Days from Final Interview On (or First) to Offered On
+    Accepted  n=26 median=5.5 min=2 max=10
+    Declined  n= 5 median=6 min=4 max=8
+    Pending   n= 5 median=8 min=5 max=10
+
+  2h. Acceptance by segment, decided offers (Accepted / Accepted+Declined). Tiny cells - read as counts.
+    by Level: Junior 9/11 (+1 pending); Lead 1/1 (+2 pending); Mid 4/5 (+1 pending); Senior 12/14 (+1 pending)
+    by Department: Customer Support 3/4 (+0 pending); Data 5/7 (+1 pending); Engineering 0/0 (+1 pending); Finance 3/4 (+0 pending); Marketing 5/5 (+1 pending); People Operations 2/2 (+2 pending); Product 5/6 (+0 pending); Sales 3/3 (+0 pending)
+    by Source: Agency 4/5 (+1 pending); Career Site 5/5 (+0 pending); Job Board 7/10 (+3 pending); LinkedIn 3/4 (+1 pending); Referral 7/7 (+0 pending)
+    by Offer quarter: 2025-Q4 7/8 (+0 pending); 2026-Q1 5/5 (+1 pending); 2026-Q2 8/12 (+2 pending); 2026-Q3 6/6 (+2 pending)
+
+  2i. Offers touched by a data problem found in the audit
+    OFF-00020 Pending   pending with decision date, opening On Hold
+    OFF-00003 Accepted  base outside band, offer date mismatch
+    OFF-00005 Accepted  start before offer
+    OFF-00013 Pending   pending with decision date, opening On Hold
+    OFF-00014 Accepted  opening Cancelled
+    OFF-00007 Pending   pending with decision date
+    OFF-00004 Accepted  base outside band, start before offer
+    OFF-00002 Pending   base outside band, offer date mismatch, pending with decision date
+    OFF-00006 Declined  base outside band, opening Cancelled
+    OFF-00019 Declined  opening Cancelled
+    OFF-00016 Accepted  base outside band
+    OFF-00001 Accepted  base outside band, offer date mismatch, start before offer, opening Cancelled
+    OFF-00031 Accepted  opening Cancelled
+    OFF-00034 Accepted  opening Cancelled
+    OFF-00011 Accepted  base outside band
+    offers with at least one problem: 15/36. On the remaining 21: {'Pending': 1, 'Accepted': 17, 'Declined': 3}
+    acceptance on clean decided offers: 17/20 = 85.0%  (95% CI 64.0-94.8%)
+
+====================================================================================================
+FUNNEL - where the 350 applications go (for sizing the roadmap)
+====================================================================================================
+  applied 350 -> screened 279 (79.7%) -> interviewed 143 (51.3% of screened) -> offered 36 (25.2% of interviewed) -> hired 26 (72.2% of offered)
+  days applied -> screened            n=279 median=    6 p90=  30 max=39
+  days screened -> first interview    n=143 median=    9 p90=  14 max=14
+  days first interview -> offer       n= 36 median= 16.5 p90=  23 max=30
+  days applied -> hired (hires only)  n= 26 median= 40.0 p90=  55 max=60
+
+  Active applications (105) - how long since their last recorded milestone, by stage
+    Applied    n= 45 median idle days=  161 idle>30d= 42 idle>90d= 31
+    Screening  n= 32 median idle days=103.5 idle>30d= 32 idle>90d= 20
+    Interview  n= 23 median idle days=  101 idle>30d= 23 idle>90d= 15
+    Offer      n=  5 median idle days=   90 idle>30d=  5 idle>90d=  2
+    active applications by opening status: {'Filled': 55, 'Open': 39, 'On Hold': 7, 'Cancelled': 4}
+
+  Interviews (160): {'Completed': 138, 'No Show': 10, 'Rescheduled': 5, 'Cancelled': 7}; not completed = 22/160 = 13.8%  (95% CI 9.3-19.9%)
+  Rejection/withdrawal reasons (all closed non-hires): {'Skills Mismatch': 49, 'Culture Fit': 45, 'Better Candidate': 44, 'Comp Expectation': 26, 'Position Cancelled': 18, 'No Show': 18, 'Withdrew': 14}
+  'Comp Expectation' rejections by furthest point reached: {'screened': 18, 'applied': 5, 'interviewed': 3}

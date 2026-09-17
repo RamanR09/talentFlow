@@ -1,0 +1,192 @@
+
+--- A. Uniqueness ---
+[OK  ] A1 Departments: rows sharing a Code: 0/8
+[OK  ] A2 People: rows sharing a Work Email: 0/14
+[OK  ] A3 Job Openings: rows sharing a Req ID: 0/24
+[OK  ] A4 Candidates: rows sharing a Candidate ID: 0/300
+[FAIL] A5 Applications: rows sharing a Application ID: 8/350
+         e.g. APP-00005; APP-00007; APP-00010; APP-00001; APP-00007; APP-00001
+[OK  ] A6 Interviews: rows sharing a Interview ID: 0/160
+[OK  ] A7 Offers: rows sharing a Offer ID: 0/36
+         APP-00001:
+           reckLPXA8xRgWsC1l cand=CAND-00003 open=REQ-2025-016 applied=2026-01-02 stage=Offer
+           recsWENinZHkh9BBS cand=CAND-00001 open=REQ-2026-011 applied=2026-05-31 stage=Rejected
+         APP-00005:
+           recGSUwByKNRw5ugN cand=CAND-00006 open=REQ-2025-009 applied=2026-01-03 stage=Rejected
+           recwwFHgFJVvqXjbl cand=CAND-00005 open=REQ-2026-017 applied=2025-08-30 stage=Rejected
+         APP-00007:
+           recPKXgzmuoBaSLui cand=CAND-00009 open=REQ-2026-017 applied=2026-03-18 stage=Rejected
+           recsR2Y6HZo9GiSb7 cand=CAND-00007 open=REQ-2025-019 applied=2026-08-02 stage=Rejected
+         APP-00010:
+           receoLsZYU1qm4tPS cand=CAND-00011 open=REQ-2025-007 applied=2025-11-07 stage=Applied
+           recxPVkspAJrZQp25 cand=CAND-00010 open=REQ-2025-001 applied=2026-02-24 stage=Rejected
+[FAIL] A8 Candidates sharing a phone number: 12/300
+         e.g. CAND-00010; CAND-00009; CAND-00012; CAND-00011; CAND-00001; CAND-00005; CAND-00007; CAND-00006; CAND-00004; CAND-00008; CAND-00003; CAND-00002
+[FAIL] A9 Candidates sharing a full name: 12/300
+         e.g. CAND-00010; CAND-00009; CAND-00012; CAND-00011; CAND-00001; CAND-00005; CAND-00007; CAND-00006; CAND-00004; CAND-00008; CAND-00003; CAND-00002
+[OK  ] A10 Candidates sharing an email (case-insensitive): 0/300
+[FAIL] A11 Candidate rows in a same-name-and-phone group (likely one person): 12/300
+         e.g. CAND-00010; CAND-00009; CAND-00012; CAND-00011; CAND-00001; CAND-00002; CAND-00005; CAND-00006; CAND-00007; CAND-00008; CAND-00004; CAND-00003
+         CAND-00010 Kavya Menon k.menon@example.com src=Job Board apps=['APP-00010:Rejected', 'APP-00310:Hired'] | CAND-00009 Kavya Menon kavya.menon8@example.com src=Job Board apps=['APP-00007:Rejected', 'APP-00309:Applied']
+         CAND-00012 Vinay Nair v.nair@example.com src=Job Board apps=['APP-00012:Rejected', 'APP-00312:Screening'] | CAND-00011 Vinay Nair vinay.nair10@example.com src=Job Board apps=['APP-00010:Applied', 'APP-00311:Rejected']
+         CAND-00001 Varun Sharma varun.sharma0@example.com src=Job Board apps=['APP-00001:Rejected', 'APP-00301:Rejected'] | CAND-00002 Varun Sharma v.sharma@example.com src=Referral apps=['APP-00002:Hired', 'APP-00302:Rejected']
+         CAND-00005 Anjali Jain anjali.jain4@example.com src=Job Board apps=['APP-00005:Rejected', 'APP-00305:Applied'] | CAND-00006 Anjali Jain a.jain@example.com src=Job Board apps=['APP-00005:Rejected', 'APP-00306:Rejected']
+         CAND-00007 Sagar Agarwal sagar.agarwal6@example.com src=Job Board apps=['APP-00007:Rejected', 'APP-00307:Applied'] | CAND-00008 Sagar Agarwal s.agarwal@example.com src=Job Board apps=['APP-00008:Interview', 'APP-00308:Rejected']
+         CAND-00004 Aarav Menon a.menon@example.com src=Referral apps=['APP-00004:Hired', 'APP-00304:Rejected'] | CAND-00003 Aarav Menon aarav.menon2@example.com src=Job Board apps=['APP-00001:Offer', 'APP-00303:Rejected']
+[FAIL] A12 Applications where the same candidate applied to the same opening more than once: 6/350
+         e.g. APP-00311; APP-00335; APP-00010; APP-00305; APP-00035; APP-00005
+
+--- B. Referential integrity ---
+[OK  ] B1 Applications.Candidate: broken / missing / multi-valued link: 0/350
+[OK  ] B2 Applications.Opening: broken / missing / multi-valued link: 0/350
+[OK  ] B3 Applications.Recruiter: broken / missing / multi-valued link: 0/350
+[OK  ] B4 Applications.Referred By: broken / missing / multi-valued link: 0/350
+[OK  ] B5 Interviews.Application: broken / missing / multi-valued link: 0/160
+[OK  ] B6 Interviews.Interviewer: broken / missing / multi-valued link: 0/160
+[OK  ] B7 Offers.Application: broken / missing / multi-valued link: 0/36
+[OK  ] B8 Job Openings.Department: broken / missing / multi-valued link: 0/24
+[OK  ] B9 Job Openings.Hiring Manager: broken / missing / multi-valued link: 0/24
+[OK  ] B10 Job Openings.Recruiter: broken / missing / multi-valued link: 0/24
+[OK  ] B11 People.Department: broken / missing / multi-valued link: 0/14
+[FAIL] B12 Applications whose Recruiter differs from the opening's Recruiter: 4/350
+         e.g. APP-00002; APP-00001; APP-00001; APP-00004
+[OK  ] B13 Applications.Recruiter points at a person whose Role is not Recruiter: 0/350
+[OK  ] B14 Interviews.Interviewer points at a person whose Role is not Interviewer: 0/160
+[OK  ] B15 Job Openings.Hiring Manager points at a person whose Role is not Hiring Manager: 0/24
+[OK  ] B16 Applications with more than one Offer: 0/350
+
+--- C. Completeness (conditional fields) ---
+[OK  ] C1 Stage=Rejected with no Rejection Reason: 0/200
+[FAIL] C2 Rejection Reason filled on a non-Rejected application: 18/350
+         e.g. APP-00037:Withdrawn:Withdrew; APP-00080:Withdrawn:Withdrew; APP-00008:Interview:Culture Fit; APP-00344:Withdrawn:Withdrew; APP-00024:Withdrawn:Withdrew; APP-00084:Withdrawn:Withdrew; APP-00189:Withdrawn:Withdrew; APP-00236:Withdrawn:Withdrew; APP-00002:Hired:Better Candidate; APP-00028:Withdrawn:Withdrew; APP-00001:Offer:Withdrew; APP-00230:Withdrawn:Withdrew; APP-00119:Withdrawn:Withdrew; APP-00329:Withdrawn:Withdrew; APP-00004:Hired:Culture Fit; APP-00266:Withdrawn:Withdrew; APP-00013:Withdrawn:Withdrew; APP-00272:Withdrawn:Withdrew
+         by stage/reason: {('Withdrawn', 'Withdrew'): 14, ('Interview', 'Culture Fit'): 1, ('Hired', 'Better Candidate'): 1, ('Offer', 'Withdrew'): 1, ('Hired', 'Culture Fit'): 1}
+[OK  ] C3 Status=Closed without Closed On, or Closed On with Status=Active: 0/350
+         Stage x Status: {('Applied', 'Active'): 45, ('Hired', 'Closed'): 26, ('Interview', 'Active'): 23, ('Offer', 'Active'): 5, ('Offer', 'Closed'): 5, ('Rejected', 'Closed'): 200, ('Screening', 'Active'): 32, ('Withdrawn', 'Closed'): 14}
+[OK  ] C4 Application has Interviews linked but no First Interview On (or the reverse): 0/350
+[OK  ] C5 Application has Offered On but no Offer record (or the reverse): 0/350
+[OK  ] C6 Stage in Interview/Offer/Hired but no Screened On: 0/59
+[OK  ] C7 Stage in Offer/Hired but no interview on record: 0/36
+[OK  ] C8 Stage=Applied but has Screened On / interviews / offer: 0/45
+[OK  ] C9 Offer decided (Accepted/Declined) with no Decision On: 0/36
+[FAIL] C10 Offer Pending but has a Decision On date: 4/36
+         e.g. OFF-00020 offered=2026-08-04 decision=2026-08-15; OFF-00013 offered=2026-06-19 decision=2026-07-05; OFF-00007 offered=2026-08-07 decision=2026-08-20; OFF-00002 offered=2026-01-17 decision=2026-02-02
+[OK  ] C11 Decline Reason does not match Status=Declined: 0/36
+[OK  ] C12 Interview Outcome=Completed missing Completed On/Score/Recommendation: 0/138
+[FAIL] C13 Interview not Completed (No Show/Cancelled/Rescheduled) but has Score/Recommendation/Completed On: 4/22
+         e.g. INT-00002:Cancelled:Strong No Hire; INT-00004:No Show:Hire; INT-00005:No Show:No Hire; INT-00003:No Show:Strong Hire
+
+--- D. Validity ---
+[OK  ] D1 Interview Score outside 1-5: 0/142
+[OK  ] D2 Opening Salary Band Min >= Max: 0/24
+[FAIL] D3 Candidate Expected CTC below Current CTC: 4/300
+         e.g. CAND-00001 cur=1030000 exp=718566; CAND-00004 cur=2470000 exp=1532972; CAND-00003 cur=2120000 exp=1395659; CAND-00002 cur=420000 exp=286858
+[OK  ] D4 Candidate Expected CTC more than 2x Current CTC: 0/300
+[FAIL] D5 Offer Base CTC outside the opening's salary band: 7/36
+         e.g. OFF-00003 Accepted base=2258706 band=(800000, 1600000); OFF-00004 Accepted base=880000 band=(1600000, 3000000); OFF-00002 Pending base=440000 band=(800000, 1600000); OFF-00006 Declined base=2850000 band=(400000, 800000); OFF-00016 Accepted base=4180000 band=(800000, 1600000); OFF-00001 Accepted base=1093624 band=(400000, 800000); OFF-00011 Accepted base=670000 band=(1600000, 3000000)
+[FAIL] D6 Offer Base CTC below the candidate's Current CTC: 13/36
+         e.g. OFF-00027 Accepted; OFF-00003 Accepted; OFF-00012 Declined; OFF-00014 Accepted; OFF-00022 Accepted; OFF-00007 Pending
+[OK  ] D7 Candidate Years Experience negative or above 45: 0/300
+         phone digit-lengths: {12: 300}
+[OK  ] D8 Candidate email not a plausible address: 0/300
+
+--- E. Time order (ISO dates compare as strings) ---
+[OK  ] E1 Application milestone dates out of order: 0/350
+         which pair: {}
+         by stage: {}
+[FAIL] E2 Applied On earlier than the opening's Opened On: 3/350
+         e.g. APP-00028 applied=2025-05-06 opened=2026-02-23; APP-00018 applied=2026-04-06 opened=2026-04-09; APP-00005 applied=2025-08-30 opened=2026-02-23
+[FAIL] E3 Candidate Created On later than their first Applied On: 84/300
+         e.g. CAND-00219; CAND-00082; CAND-00063; CAND-00212; CAND-00282; CAND-00163
+[FAIL] E4 Interview Completed On earlier than Scheduled On: 4/142
+         e.g. INT-00013; INT-00004; INT-00012; INT-00010
+[FAIL] E5 Interview scheduled before the application's Applied On: 9/160
+         e.g. INT-00002; INT-00007; INT-00001; INT-00006; INT-00009; INT-00011
+[FAIL] E6 Application First Interview On differs from earliest linked interview date: 13/143
+         e.g. APP-00015; APP-00014; APP-00008; APP-00017; APP-00016; APP-00019
+[FAIL] E7 Offer.Offered On differs from Application.Offered On: 3/36
+         e.g. OFF-00003; OFF-00002; OFF-00001
+[OK  ] E8 Offer Decision On earlier than Offered On: 0/36
+[FAIL] E9 Offer Proposed Start Date earlier than Offered On: 3/36
+         e.g. OFF-00005; OFF-00004; OFF-00001
+[OK  ] E10 Event dates after the pull date (2026-09-17): 0/all date fields
+[OK  ] E11 Interviewer interviewed before their own Joined On: 0/160
+         pending offers, days open at pull date: [('OFF-00002', '2026-01-17'), ('OFF-00007', '2026-08-07'), ('OFF-00013', '2026-06-19'), ('OFF-00020', '2026-08-04'), ('OFF-00021', '2026-05-02')]
+
+--- F. Cross-table agreement ---
+         Application Stage x Offer Status: {('Hired', 'Closed', 'Accepted'): 26, ('Offer', 'Active', 'Pending'): 5, ('Offer', 'Closed', 'Declined'): 5}
+[OK  ] F1 Stage=Hired without an Accepted offer: 0/26
+[OK  ] F2 Accepted offer but application Stage is not Hired: 0/26
+[FAIL] F3 Stage=Offer without a Pending offer: 5/10
+         e.g. APP-00039:Closed:Declined; APP-00043:Closed:Declined; APP-00019:Closed:Declined; APP-00087:Closed:Declined; APP-00223:Closed:Declined
+[FAIL] F4 Openings with more hires than Headcount: 4/24
+         e.g. REQ-2025-015 hires=3 headcount=1; REQ-2025-024 hires=2 headcount=1; REQ-2025-007 hires=2 headcount=1; REQ-2026-008 hires=2 headcount=1
+[FAIL] F5 Openings marked Filled with fewer hires than Headcount: 2/8
+         e.g. REQ-2026-017 hires=0 headcount=1; REQ-2026-011 hires=0 headcount=2
+[FAIL] F6 Openings not marked Filled although hires >= Headcount: 6/16
+         e.g. REQ-2025-015 Cancelled hires=3 headcount=1; REQ-2025-007 Open hires=2 headcount=1; REQ-2025-012 Open hires=2 headcount=2; REQ-2025-003 Open hires=1 headcount=1; REQ-2025-016 Open hires=1 headcount=1; REQ-2025-010 Open hires=1 headcount=1
+         hires by opening status: {'Filled': 11, 'Open': 11, 'Cancelled': 4}
+[FAIL] F7 Active applications on openings that are Filled/Cancelled/On Hold: 66/105
+         e.g. APP-00055:Filled; APP-00127:Filled; APP-00135:Filled; APP-00117:Filled; APP-00206:Filled; APP-00241:Filled
+         active apps by opening status: {'Filled': 55, 'Open': 39, 'On Hold': 7, 'Cancelled': 4}
+[FAIL] F8 Rejection Reason=Position Cancelled but the opening is not Cancelled: 18/18
+         e.g. APP-00249:Open; APP-00202:Filled; APP-00276:Filled; APP-00093:Open; APP-00050:On Hold; APP-00111:Open
+[FAIL] F9 Offers (any status) on openings that are Cancelled/On Hold: 8/36
+         e.g. OFF-00020:Pending; OFF-00013:Pending; OFF-00014:Accepted; OFF-00006:Declined; OFF-00019:Declined; OFF-00001:Accepted
+   -- Source vs referral evidence --
+[FAIL] F10 Applications with Referred By whose candidate Source is not Referral: 24/27
+         e.g. APP-00206:Job Board:Screening; APP-00349:Job Board:Rejected; APP-00293:Agency:Hired; APP-00136:Job Board:Screening; APP-00080:Agency:Withdrawn; APP-00321:Job Board:Rejected; APP-00310:Job Board:Hired; APP-00016:Job Board:Rejected; APP-00083:Agency:Rejected; APP-00108:Agency:Screening; APP-00053:Career Site:Applied; APP-00347:Job Board:Interview; APP-00047:Job Board:Rejected; APP-00330:Job Board:Rejected; APP-00316:Job Board:Applied; APP-00142:Job Board:Interview; APP-00103:Career Site:Hired; APP-00190:Job Board:Interview; APP-00056:Career Site:Rejected; APP-00030:Job Board:Rejected; APP-00049:Job Board:Rejected; APP-00118:Job Board:Screening; APP-00021:Job Board:Applied; APP-00010:Job Board:Rejected
+         Source of candidates on Referred-By applications: {'Job Board': 17, 'Agency': 4, 'Referral': 3, 'Career Site': 3}
+[FAIL] F11 Candidates with Source=Referral but no application has Referred By: 5/8
+         e.g. CAND-00035; CAND-00004; CAND-00014; CAND-00002; CAND-00015
+         Candidates whose Notes say 'Referred internally': 38 by Source: {'Agency': 5, 'LinkedIn': 5, 'Job Board': 25, 'Career Site': 1, 'Referral': 2} | with a Referred By link: 2
+         Notes 'Sourced from a conference list' by Source: {'Job Board': 22, 'LinkedIn': 4, 'Career Site': 4, 'Agency': 3, 'Referral': 1}
+         Notes text looks randomly assigned if spread evenly over Source - compare with overall Source mix: {'Agency': 35, 'LinkedIn': 31, 'Job Board': 191, 'Career Site': 31, 'Referral': 8, 'Campus': 4}
+   -- Interview signal vs outcome --
+[FAIL] F12 Interview feedback text contradicts the Recommendation: 2/142
+         e.g. INT-00145:Strong Hire:4.5; INT-00073:Strong Hire:4.5
+[FAIL] F13 Recommendation contradicts Score (Hire/Strong Hire with score <3, or No Hire with score >=4): 2/142
+         e.g. INT-00095:Hire:2.9; INT-00159:Hire:2.5
+         score range by recommendation: {'No Hire': (1.5, 3.7, 48), 'Strong No Hire': (1, 2.1, 39), 'Hire': (2.5, 4.8, 34), 'Strong Hire': (3.8, 5, 21)}
+[FAIL] F14 Offer/Hired applications where every recorded interview recommendation was No Hire / Strong No Hire: 8/36
+         e.g. APP-00015; APP-00039; APP-00310; APP-00327; APP-00334; APP-00001; APP-00094; APP-00067
+         recorded recommendations behind each of those: {1: 8} | offered applications with no recorded recommendation at all: 3
+
+--- G. Junk / test records ---
+[OK  ] G1 Candidates whose name or email looks like a test record: 0/300
+[OK  ] G2 Openings whose title looks like a test record: 0/24
+         email domains: {'example.com': 300}
+[OK  ] G3 Candidates with no application: 0/300
+
+=== SUMMARY: failed checks ===
+  A5      8/350   Applications: rows sharing a Application ID
+  A8     12/300   Candidates sharing a phone number
+  A9     12/300   Candidates sharing a full name
+  A11    12/300   Candidate rows in a same-name-and-phone group (likely one person)
+  A12     6/350   Applications where the same candidate applied to the same opening more than once
+  B12     4/350   Applications whose Recruiter differs from the opening's Recruiter
+  C2     18/350   Rejection Reason filled on a non-Rejected application
+  C10     4/36    Offer Pending but has a Decision On date
+  C13     4/22    Interview not Completed (No Show/Cancelled/Rescheduled) but has Score/Recommendation/Completed On
+  D3      4/300   Candidate Expected CTC below Current CTC
+  D5      7/36    Offer Base CTC outside the opening's salary band
+  D6     13/36    Offer Base CTC below the candidate's Current CTC
+  E2      3/350   Applied On earlier than the opening's Opened On
+  E3     84/300   Candidate Created On later than their first Applied On
+  E4      4/142   Interview Completed On earlier than Scheduled On
+  E5      9/160   Interview scheduled before the application's Applied On
+  E6     13/143   Application First Interview On differs from earliest linked interview date
+  E7      3/36    Offer.Offered On differs from Application.Offered On
+  E9      3/36    Offer Proposed Start Date earlier than Offered On
+  F3      5/10    Stage=Offer without a Pending offer
+  F4      4/24    Openings with more hires than Headcount
+  F5      2/8     Openings marked Filled with fewer hires than Headcount
+  F6      6/16    Openings not marked Filled although hires >= Headcount
+  F7     66/105   Active applications on openings that are Filled/Cancelled/On Hold
+  F8     18/18    Rejection Reason=Position Cancelled but the opening is not Cancelled
+  F9      8/36    Offers (any status) on openings that are Cancelled/On Hold
+  F10    24/27    Applications with Referred By whose candidate Source is not Referral
+  F11     5/8     Candidates with Source=Referral but no application has Referred By
+  F12     2/142   Interview feedback text contradicts the Recommendation
+  F13     2/142   Recommendation contradicts Score (Hire/Strong Hire with score <3, or No Hire with score >=4)
+  F14     8/36    Offer/Hired applications where every recorded interview recommendation was No Hire / Strong No Hire
+  checks run: 77, failed: 31

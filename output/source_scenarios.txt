@@ -1,0 +1,95 @@
+================================================================================================
+PART 1 - APPLICATION-LEVEL COUNTS BY SCENARIO
+================================================================================================
+
+S0  As recorded   [application rows=350, hires=26]
+  group       apps  % of apps  hires  % of hires   hires per application (95% CI)
+  Job Board    236      67.4%      7       26.9%   7/236 = 3.0%  (1.4-6.0%)
+  Referral      13       3.7%      7       26.9%   7/13 = 53.8%  (29.1-76.8%)
+  Other        101      28.9%     12       46.2%   12/101 = 11.9%  (6.9-19.6%)
+  Non-JB       114      32.6%     19       73.1%   19/114 = 16.7%  (10.9-24.6%)
+  Non-JB converts at 5.6x Job Board. Job Board interval tops out at 6.0%, Non-JB interval starts at 10.9%: no overlap
+
+S1  Referral evidence (Source=Referral OR Referred By link)   [application rows=350, hires=26]
+  group       apps  % of apps  hires  % of hires   hires per application (95% CI)
+  Job Board    219      62.6%      6       23.1%   6/219 = 2.7%  (1.3-5.8%)
+  Referral      37      10.6%     10       38.5%   10/37 = 27.0%  (15.4-43.0%)
+  Other         94      26.9%     10       38.5%   10/94 = 10.6%  (5.9-18.5%)
+  Non-JB       131      37.4%     20       76.9%   20/131 = 15.3%  (10.1-22.4%)
+  Non-JB converts at 5.6x Job Board. Job Board interval tops out at 5.8%, Non-JB interval starts at 10.1%: no overlap
+
+S2  De-duplicated (repeat person+opening applications removed), as recorded   [application rows=347, hires=25]
+  group       apps  % of apps  hires  % of hires   hires per application (95% CI)
+  Job Board    234      67.4%      7       28.0%   7/234 = 3.0%  (1.5-6.0%)
+  Referral      12       3.5%      6       24.0%   6/12 = 50.0%  (25.4-74.6%)
+  Other        101      29.1%     12       48.0%   12/101 = 11.9%  (6.9-19.6%)
+  Non-JB       113      32.6%     18       72.0%   18/113 = 15.9%  (10.3-23.8%)
+  Non-JB converts at 5.3x Job Board. Job Board interval tops out at 6.0%, Non-JB interval starts at 10.3%: no overlap
+
+S3  Combined: de-duplicated + referral evidence   [application rows=347, hires=25]
+  group       apps  % of apps  hires  % of hires   hires per application (95% CI)
+  Job Board    217      62.5%      6       24.0%   6/217 = 2.8%  (1.3-5.9%)
+  Referral      36      10.4%      9       36.0%   9/36 = 25.0%  (13.8-41.1%)
+  Other         94      27.1%     10       40.0%   10/94 = 10.6%  (5.9-18.5%)
+  Non-JB       130      37.5%     19       76.0%   19/130 = 14.6%  (9.6-21.7%)
+  Non-JB converts at 5.3x Job Board. Job Board interval tops out at 5.9%, Non-JB interval starts at 9.6%: no overlap
+
+S4  Combined, strict: S3 and hires on Cancelled openings not counted   [application rows=347, hires=21]
+  group       apps  % of apps  hires  % of hires   hires per application (95% CI)
+  Job Board    217      62.5%      4       19.0%   4/217 = 1.8%  (0.7-4.6%)
+  Referral      36      10.4%      7       33.3%   7/36 = 19.4%  (9.8-35.0%)
+  Other         94      27.1%     10       47.6%   10/94 = 10.6%  (5.9-18.5%)
+  Non-JB       130      37.5%     17       81.0%   17/130 = 13.1%  (8.3-19.9%)
+  Non-JB converts at 7.1x Job Board. Job Board interval tops out at 4.6%, Non-JB interval starts at 8.3%: no overlap
+
+  Rule D removed 3 repeat application rows:
+    rec2boXJI2mO6NvdL APP-00311 CAND-00011 Vinay Nair REQ-2025-007 applied=2025-10-29 stage=Rejected recorded=Job Board
+    recrCOYOF6KWpUmqW APP-00035 CAND-00035 Vinay Khanna REQ-2025-019 applied=2026-01-14 stage=Hired recorded=Referral
+    recwwFHgFJVvqXjbl APP-00005 CAND-00005 Anjali Jain REQ-2026-017 applied=2025-08-30 stage=Rejected recorded=Job Board
+  Rule C: hires on Cancelled openings = 4: APP-00319(Job Board), APP-00334(Job Board), APP-00002(Referral), APP-00103(Referral)
+
+================================================================================================
+PART 2 - PEOPLE-LEVEL COUNTS (each person once, hired once)
+================================================================================================
+  candidate rows=300 -> distinct people=294 (6 people entered twice)
+
+P0  As recorded (duplicate pair -> source of the hired row, else the earlier row)   [people=294, people hired=24]
+  group      people  % people  hired  % of hired   hired per person (95% CI)
+  Job Board     185     62.9%      7       29.2%   7/185 = 3.8%  (1.8-7.6%)
+  Referral        8      2.7%      5       20.8%   5/8 = 62.5%  (30.6-86.3%)
+  Other         101     34.4%     12       50.0%   12/101 = 11.9%  (6.9-19.6%)
+
+P1  Referral evidence (any Source=Referral row or any Referred By link)   [people=294, people hired=24]
+  group      people  % people  hired  % of hired   hired per person (95% CI)
+  Job Board     174     59.2%      6       25.0%   6/174 = 3.4%  (1.6-7.3%)
+  Referral       26      8.8%      8       33.3%   8/26 = 30.8%  (16.5-50.0%)
+  Other          94     32.0%     10       41.7%   10/94 = 10.6%  (5.9-18.5%)
+
+  People whose duplicate rows disagree on Source: 2
+    CAND-00001 Varun Sharma Job Board hired=False | CAND-00002 Varun Sharma Referral hired=True
+    CAND-00004 Aarav Menon Referral hired=True | CAND-00003 Aarav Menon Job Board hired=False
+  People with more than one Hired application (rule H): 2 -> 4 hire rows for 2 people
+    Vinay Khanna: APP-00035 REQ-2025-019 hired 2026-02-11, APP-00335 REQ-2025-019 hired 2026-07-09
+    Sneha Shah: APP-00015 REQ-2026-008 hired 2026-07-13, APP-00315 REQ-2025-024 hired 2026-03-30
+
+================================================================================================
+PART 3 - WHERE REFERRAL IS NOT IDENTIFIED PROPERLY (all 350 application rows)
+================================================================================================
+  cell                                                                 apps  cands  hires
+  A. Source=Referral AND Referred By link   (consistent referral)         3      3      0
+  B. Source=Referral, NO Referred By link    (referrer missing)          10      5      7
+  C. Referred By link, Source NOT Referral   (source mislabelled)        24     18      3
+  D. Neither                                 (consistent non-referral)  313    274     16
+
+  Applications with any referral signal: 37/350. Of those, inconsistent (B + C): 34/37 = 91.9%
+  Hires with any referral signal: 10/26. Of those, inconsistent: 10/10
+  Inconsistent referral rows as a share of everything: 34/350 applications = 9.7%, 10/26 hires = 38.5%
+
+  Cell C by recorded Source: {'Job Board': 17, 'Agency': 4, 'Career Site': 3}
+  Cell C hires: [('APP-00293', 'Agency'), ('APP-00310', 'Job Board'), ('APP-00103', 'Career Site')]
+  Cell B candidates: ['CAND-00002', 'CAND-00004', 'CAND-00014', 'CAND-00015', 'CAND-00035']
+  Cell A candidates: ['CAND-00232', 'CAND-00242', 'CAND-00256']
+
+  Third signal - Candidates.Notes = 'Referred internally...'
+    candidates with that note: 38/300; of them Source=Referral: 2; with a Referred By link: 2
+    reliability test of Notes: 'Applied to two openings' note on 33 candidates, of whom 2 actually have more than one application

@@ -1,0 +1,26 @@
+BUILD 1 - attribution and identity
+  applications with a referral signal whose two signals contradict: 34/37 = 91.9% | as a share of all applications: 34/350 = 9.7%
+  hires among them: 10/26 = 38.5%
+  candidates with more than one application (Source is stored once per candidate): 50/300 = 16.7%
+  duplicate candidate rows (same name and phone): 12/300 = 4.0% | people: 6 | rows holding a hire: 3
+  duplicate rows a match on email would catch: 0 of 12
+
+BUILD 2 - offer lifecycle
+  pending offers: 5/36; with a decision date: 4; open more than 20 days: 5; more than 30 days: 5
+  declined offers whose application still says Offer stage: 5/5
+  offers with a status problem (stale pending + declined at Offer stage): 10/36 = 27.8%
+
+BUILD 3 - pipeline hygiene
+  active applications on openings that are not Open: 66/105 = 62.9% {'Filled': 55, 'On Hold': 7, 'Cancelled': 4}
+  active applications idle more than 30 days: 102/105 = 97.1% | more than 90 days: 68/105 = 64.8%
+  active applications as a share of all applications: 105/350 = 30.0%
+  openings whose Status or Headcount disagrees with their hires: 10/24 = 41.7%
+  'Position Cancelled' rejections on openings that are not Cancelled: 18/18
+
+NOT BUILDING 3 - interview scores
+  applications with an offer: 36 | with no recorded recommendation at all: 3
+  offers where every recorded recommendation was No Hire or Strong No Hire: 8/36 = 22.2%
+    number of interviews behind those offers: {1: 8}
+    outcome of those offers: {'Accepted': 5, 'Declined': 1, 'Pending': 2}
+  offers with at least one No Hire or Strong No Hire: 10/36 = 27.8%
+  closed applications with only Hire or Strong Hire recommendations and no offer: 9

@@ -1,0 +1,197 @@
+==============================================================================
+CASE 1  real offers, as-of 2026-09-17
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=26 denominator=31  ('26 of 31')
+  rate=83.9%  interval=67.4% .. 92.9%   [SHOWN on dashboard]
+  Pending=0 Unresolved=1 Broken=4 (in-window 4 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=0)
+  STATE: Ambiguous
+  range: 72.2% .. 86.1%  (over 5 Unresolved / Pending-with-decision offers)
+  fix list (5):
+     OFF-00002 | Broken | Status Pending with Decision On 2026-02-02
+     OFF-00007 | Broken | Status Pending with Decision On 2026-08-20
+     OFF-00013 | Broken | Status Pending with Decision On 2026-07-05
+     OFF-00020 | Broken | Status Pending with Decision On 2026-08-15
+     OFF-00021 | Unresolved | Pending, no Decision On, offered 138 days before as-of
+==============================================================================
+CASE 2  clean set (31 offers), as-of 2026-09-17
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=26 denominator=31  ('26 of 31')
+  rate=83.9%  interval=67.4% .. 92.9%   [SHOWN on dashboard]
+  Pending=0 Unresolved=0 Broken=0 (in-window 0 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=0)
+  STATE: Normal
+  range: none shown
+  fix list (0):
+==============================================================================
+CASE 3  clean + OFF-90003 (Accepted, undated, decided 2026-09-05) on recSYNTH2
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=26 denominator=31  ('26 of 31')
+  rate=83.9%  interval=67.4% .. 92.9%   [SHOWN on dashboard]
+  Pending=0 Unresolved=0 Broken=1 (in-window 0 + undated 1) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=0)
+  STATE: Ambiguous
+  range: none shown
+  fix list (1):
+     OFF-90003 | Broken | no Offered On
+==============================================================================
+CASE 4  clean + OFF-90008 (Pending, offered 2026-09-10) on OFF-00024's application
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=25 denominator=30  ('25 of 30')
+  rate=83.3%  interval=66.4% .. 92.7%   [SHOWN on dashboard]
+  Pending=1 Unresolved=0 Broken=0 (in-window 0 + undated 0) Withdrawn=0 superseded=1 ['OFF-00024']
+  (Reneged inside numerator=0; kept offers outside window=0)
+  STATE: Normal
+  range: none shown
+  fix list (0):
+==============================================================================
+CASE 5  clean + OFF-90007 (Accepted, offered=decided=2025-09-18) on recSYNTH5
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=27 denominator=32  ('27 of 32')
+  rate=84.4%  interval=68.2% .. 93.1%   [SHOWN on dashboard]
+  Pending=0 Unresolved=0 Broken=0 (in-window 0 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=0)
+  STATE: Normal
+  range: none shown
+  fix list (0):
+==============================================================================
+CASE 5  clean + OFF-90007 (Accepted, offered=decided=2025-09-17) on recSYNTH5
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=26 denominator=31  ('26 of 31')
+  rate=83.9%  interval=67.4% .. 92.9%   [SHOWN on dashboard]
+  Pending=0 Unresolved=0 Broken=0 (in-window 0 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=1)
+  STATE: Normal
+  range: none shown
+  fix list (0):
+==============================================================================
+CASE 6  real offers, as-of 2026-02-01
+  window: 2025-02-02 .. 2026-02-01 (365 days)
+  numerator=9 denominator=10  ('9 of 10')
+  rate=90.0%  interval=59.6% .. 98.2%   [computed but NOT shown on dashboard]
+  Pending=0 Unresolved=0 Broken=1 (in-window 1 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=25)
+  STATE: Insufficient data
+  range: none shown
+  fix list (1):
+     OFF-00002 | Broken | Status Pending with Decision On 2026-02-02
+==============================================================================
+CASE 7  real offers, as-of 2025-06-01
+  window: 2024-06-02 .. 2025-06-01 (365 days)
+  numerator=0 denominator=0  ('0 of 0')
+  rate: undefined (0 decided)   interval: undefined
+  Pending=0 Unresolved=0 Broken=0 (in-window 0 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=36)
+  STATE: Empty (No decided offers)
+  range: none shown
+  fix list (0):
+==============================================================================
+CASE 8  real + OFF-90001 (Accepted 2026-08-20/25) on OFF-00012's application
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=27 denominator=31  ('27 of 31')
+  rate=87.1%  interval=71.1% .. 94.9%   [SHOWN on dashboard]
+  Pending=0 Unresolved=1 Broken=4 (in-window 4 + undated 0) Withdrawn=0 superseded=1 ['OFF-00012']
+  (Reneged inside numerator=0; kept offers outside window=0)
+  STATE: Ambiguous
+  range: 75.0% .. 88.9%  (over 5 Unresolved / Pending-with-decision offers)
+  fix list (5):
+     OFF-00002 | Broken | Status Pending with Decision On 2026-02-02
+     OFF-00007 | Broken | Status Pending with Decision On 2026-08-20
+     OFF-00013 | Broken | Status Pending with Decision On 2026-07-05
+     OFF-00020 | Broken | Status Pending with Decision On 2026-08-15
+     OFF-00021 | Unresolved | Pending, no Decision On, offered 138 days before as-of
+==============================================================================
+CASE 9  real, OFF-00024 Status -> Reneged
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=26 denominator=31  ('26 of 31')
+  rate=83.9%  interval=67.4% .. 92.9%   [SHOWN on dashboard]
+  Pending=0 Unresolved=1 Broken=4 (in-window 4 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=1; kept offers outside window=0)
+  STATE: Ambiguous
+  range: 72.2% .. 86.1%  (over 5 Unresolved / Pending-with-decision offers)
+  fix list (5):
+     OFF-00002 | Broken | Status Pending with Decision On 2026-02-02
+     OFF-00007 | Broken | Status Pending with Decision On 2026-08-20
+     OFF-00013 | Broken | Status Pending with Decision On 2026-07-05
+     OFF-00020 | Broken | Status Pending with Decision On 2026-08-15
+     OFF-00021 | Unresolved | Pending, no Decision On, offered 138 days before as-of
+==============================================================================
+CASE 9  real, OFF-00024 Status -> Expired
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=25 denominator=30  ('25 of 30')
+  rate=83.3%  interval=66.4% .. 92.7%   [SHOWN on dashboard]
+  Pending=0 Unresolved=1 Broken=5 (in-window 5 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=0)
+  STATE: Ambiguous
+  range: 71.4% .. 85.7%  (over 5 Unresolved / Pending-with-decision offers)
+  fix list (6):
+     OFF-00002 | Broken | Status Pending with Decision On 2026-02-02
+     OFF-00007 | Broken | Status Pending with Decision On 2026-08-20
+     OFF-00013 | Broken | Status Pending with Decision On 2026-07-05
+     OFF-00020 | Broken | Status Pending with Decision On 2026-08-15
+     OFF-00021 | Unresolved | Pending, no Decision On, offered 138 days before as-of
+     OFF-00024 | Broken | Status 'Expired' not named in the definition table
+==============================================================================
+CASE 10 clean + OFF-90009 (Pending, offered 2026-08-18) on recSYNTH6
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=26 denominator=31  ('26 of 31')
+  rate=83.9%  interval=67.4% .. 92.9%   [SHOWN on dashboard]
+  Pending=1 Unresolved=0 Broken=0 (in-window 0 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=0)
+  STATE: Normal
+  range: none shown
+  fix list (0):
+==============================================================================
+CASE 10 clean + OFF-90009 (Pending, offered 2026-08-17) on recSYNTH6
+  window: 2025-09-18 .. 2026-09-17 (365 days)
+  numerator=26 denominator=31  ('26 of 31')
+  rate=83.9%  interval=67.4% .. 92.9%   [SHOWN on dashboard]
+  Pending=0 Unresolved=1 Broken=0 (in-window 0 + undated 0) Withdrawn=0 superseded=0 
+  (Reneged inside numerator=0; kept offers outside window=0)
+  STATE: Ambiguous
+  range: 81.3% .. 84.4%  (over 1 Unresolved / Pending-with-decision offers)
+  fix list (1):
+     OFF-90009 | Unresolved | Pending, no Decision On, offered 31 days before as-of
+
+##############################################################################
+PART B CHECKS
+##############################################################################
+B1 Pending with Decision On: 4 of 36 ['OFF-00020', 'OFF-00013', 'OFF-00007', 'OFF-00002']
+   rate 83.9 (26 of 31), range ('72.2', '86.1', 5)
+B2 Pending, no Decision On (id, days open): [('OFF-00021', 138)]
+   decision lag days among decided: min (2, 'OFF-00004') max (20, 'OFF-00001'); count >20: 0
+B3 Offered On differs Offers vs Applications: 3 of 36
+     OFF-00003 offers=2025-12-13 applications=2025-12-24 gap=11
+     OFF-00002 offers=2026-01-17 applications=2026-01-24 gap=7
+     OFF-00001 offers=2025-12-02 applications=2025-12-07 gap=5
+   using Applications.Offered On instead: 83.9% (26 of 31) P=0 U=1 B=4 state=Ambiguous range=('72.2', '86.1', 5)
+B4 Declined offers: 5; their application Stage: Counter({'Offer': 5})
+   Stage x Offer Status over all offers: {('Offer', 'Pending'): 5, ('Hired', 'Accepted'): 26, ('Offer', 'Declined'): 5}
+   application-stage reading: Hired=26 of 36 offers -> 72.2%
+B5 people (Candidate link) with decided offers: 28; with >=2 decided offers: 3
+     ('recykIELP765EIWgr',) ['Sneha Shah']: [('OFF-00030', '2026-03-20', 'Accepted'), ('OFF-00005', '2026-07-05', 'Accepted')]
+     ('recIPZ2h6RA4Asws8',) ['Pooja Khanna']: [('OFF-00031', '2025-12-20', 'Accepted'), ('OFF-00006', '2026-04-20', 'Declined')]
+     ('rec4TPTco4kDfU2DJ',) ['Vinay Khanna']: [('OFF-00008', '2026-02-01', 'Accepted'), ('OFF-00035', '2026-07-06', 'Accepted')]
+   per person, latest offer counts: 82.1% (23 of 28)
+   per person, any acceptance counts: 85.7% (24 of 28)
+   distinct Full Names among decided-offer candidates: 28 (candidate records: 28)
+B6 opening Status over all 36 offers: {'Open': 14, 'Filled': 14, 'On Hold': 2, 'Cancelled': 6}
+   over decided offers: {'Filled': 14, 'Open': 11, 'Cancelled': 6}
+   dropping Cancelled-opening offers: 88.0% (22 of 25)
+B7 Application IDs used by >1 application record: 4 ids {'APP-00005': 2, 'APP-00007': 2, 'APP-00010': 2, 'APP-00001': 2}
+   offers whose application's ID is shared: 1 of 36 [('OFF-00002', 'APP-00001', 2)]
+   offers by number of Application links: {1: 36}
+   applications with >1 offer: 0
+B8 revised offer test: with rule 87.1% (27 of 31); without rule 84.4% (27 of 32)
+B9 renege: Status Reneged -> 83.9% (26 of 31); overwritten with Declined -> 80.6% (25 of 31)
+B10 OFF-00021 (live, no decision date) -> Withdrawn: 83.9% (26 of 31) CI ('67.4', '92.9') W=1 U=0 B=4 state=Ambiguous range=('74.3', '85.7', 4) fix=4
+B10 extra Withdrawn offer added: 83.9% (26 of 31) CI ('67.4', '92.9') W=1 U=1 B=4 state=Ambiguous range=('72.2', '86.1', 5) fix=5
+B10 OFF-00007 (Pending w/ Decision On) -> Withdrawn: 83.9% (26 of 31) CI ('67.4', '92.9') W=1 U=1 B=3 state=Ambiguous range=('74.3', '85.7', 4) fix=4
+B11 undated offer on OFF-00024's application (which has a second, dated offer): 83.9% (26 of 31), superseded=0, fix=[('OFF-90011', 'Broken', 'no Offered On')]
+    real offers with no Offered On: 0 of 36
+B12 decided offers with no Decision On: 0 of 31 []
+    offers with Decision On before Offered On: []
+CLOSING: 83.9% (26 of 31), interval 67.4% to 92.9%, state Ambiguous, range ('72.2', '86.1', 5), offers to fix 5
+QUARTERLY decided per quarter, counted offers in the 2026-09-17 window: {'2025Q4': 8, '2026Q1': 5, '2026Q2': 12, '2026Q3': 6}
+QUARTERLY decided per quarter, all offers no window: {'2025Q4': 8, '2026Q1': 5, '2026Q2': 12, '2026Q3': 6}
+Offered On range in real data: 2025-10-14 .. 2026-08-07

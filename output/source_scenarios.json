@@ -1,0 +1,189 @@
+{
+ "scenarios": {
+  "S0": {
+   "applications": 350,
+   "hires": 26,
+   "groups": {
+    "Job Board": {
+     "apps": 236,
+     "hires": 7
+    },
+    "Referral": {
+     "apps": 13,
+     "hires": 7
+    },
+    "Other": {
+     "apps": 101,
+     "hires": 12
+    }
+   },
+   "non_jb": {
+    "apps": 114,
+    "hires": 19,
+    "ratio_vs_job_board": 5.6,
+    "job_board_ci_high": 6.0,
+    "non_jb_ci_low": 10.9
+   }
+  },
+  "S1": {
+   "applications": 350,
+   "hires": 26,
+   "groups": {
+    "Job Board": {
+     "apps": 219,
+     "hires": 6
+    },
+    "Referral": {
+     "apps": 37,
+     "hires": 10
+    },
+    "Other": {
+     "apps": 94,
+     "hires": 10
+    }
+   },
+   "non_jb": {
+    "apps": 131,
+    "hires": 20,
+    "ratio_vs_job_board": 5.6,
+    "job_board_ci_high": 5.8,
+    "non_jb_ci_low": 10.1
+   }
+  },
+  "S2": {
+   "applications": 347,
+   "hires": 25,
+   "groups": {
+    "Job Board": {
+     "apps": 234,
+     "hires": 7
+    },
+    "Referral": {
+     "apps": 12,
+     "hires": 6
+    },
+    "Other": {
+     "apps": 101,
+     "hires": 12
+    }
+   },
+   "non_jb": {
+    "apps": 113,
+    "hires": 18,
+    "ratio_vs_job_board": 5.3,
+    "job_board_ci_high": 6.0,
+    "non_jb_ci_low": 10.3
+   }
+  },
+  "S3": {
+   "applications": 347,
+   "hires": 25,
+   "groups": {
+    "Job Board": {
+     "apps": 217,
+     "hires": 6
+    },
+    "Referral": {
+     "apps": 36,
+     "hires": 9
+    },
+    "Other": {
+     "apps": 94,
+     "hires": 10
+    }
+   },
+   "non_jb": {
+    "apps": 130,
+    "hires": 19,
+    "ratio_vs_job_board": 5.3,
+    "job_board_ci_high": 5.9,
+    "non_jb_ci_low": 9.6
+   }
+  },
+  "S4": {
+   "applications": 347,
+   "hires": 21,
+   "groups": {
+    "Job Board": {
+     "apps": 217,
+     "hires": 4
+    },
+    "Referral": {
+     "apps": 36,
+     "hires": 7
+    },
+    "Other": {
+     "apps": 94,
+     "hires": 10
+    }
+   },
+   "non_jb": {
+    "apps": 130,
+    "hires": 17,
+    "ratio_vs_job_board": 7.1,
+    "job_board_ci_high": 4.6,
+    "non_jb_ci_low": 8.3
+   }
+  }
+ },
+ "people": {
+  "P0": {
+   "people": 294,
+   "hired": 24,
+   "groups": {
+    "Job Board": {
+     "people": 185,
+     "hired": 7
+    },
+    "Referral": {
+     "people": 8,
+     "hired": 5
+    },
+    "Other": {
+     "people": 101,
+     "hired": 12
+    }
+   }
+  },
+  "P1": {
+   "people": 294,
+   "hired": 24,
+   "groups": {
+    "Job Board": {
+     "people": 174,
+     "hired": 6
+    },
+    "Referral": {
+     "people": 26,
+     "hired": 8
+    },
+    "Other": {
+     "people": 94,
+     "hired": 10
+    }
+   }
+  }
+ },
+ "misidentified": {
+  "A": {
+   "apps": 3,
+   "candidates": 3,
+   "hires": 0
+  },
+  "B": {
+   "apps": 10,
+   "candidates": 5,
+   "hires": 7
+  },
+  "C": {
+   "apps": 24,
+   "candidates": 18,
+   "hires": 3
+  },
+  "D": {
+   "apps": 313,
+   "candidates": 274,
+   "hires": 16
+  }
+ }
+}
